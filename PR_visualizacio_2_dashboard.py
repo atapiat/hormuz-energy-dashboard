@@ -168,17 +168,7 @@ def create_oil_consumption_line_chart(df_oil_consumption):
 # PREPARACIÓN BACI OIL
 # =========================================
 def prepare_baci_oil(df_baci, df_country_codes, df_energy_gdp):
-    # Join exportador/importador
-    df_exporter_codes = df_country_codes[["country_code", "country_name"]].rename(
-        columns={"country_code": "i", "country_name": "exporter_name"}
-    )
-
-    df_importer_codes = df_country_codes[["country_code", "country_name"]].rename(
-        columns={"country_code": "j", "country_name": "importer_name"}
-    )
-
-    df_baci = df_baci.merge(df_exporter_codes, on="i", how="left")
-    df_baci = df_baci.merge(df_importer_codes, on="j", how="left")
+    
 
     # Filtrar petróleo: crudo y refinado
     df_baci_oil = df_baci[df_baci["k"].isin([270900, 271000])].copy()
